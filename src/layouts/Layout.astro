@@ -1,0 +1,93 @@
+---
+// import { ViewTransitions } from 'astro:transitions';
+import { SEO } from 'astro-seo';
+import '@static/global.css';
+import { CONFIG, LANGUAGES_CODE } from '@lib/config';
+import { getLocale, getLang } from '@i18n/index';
+interface Props {
+    title: string;
+    description?: string;
+    image?: string;
+}
+const { pathname, origin } = Astro.url;
+const { locale } = Astro.params;
+const resolvedImageWithDomain = `${origin}/image.png`;
+const canonicalURL = new URL(pathname, origin);
+const lang = getLocale(locale);
+const reg = new RegExp(`/${lang}`, 'i');
+const languagesCode = LANGUAGES_CODE as {[key: string]: string};
+const alternates = CONFIG.locals.map(item => {
+    const href = new URL((lang === 'en' && item !== 'en' ? item : '') + pathname.replace(reg, item === 'en' ? '': item), CONFIG.website).toString();
+    return {href, hrefLang: languagesCode[item] || item};
+})
+alternates.push({
+    href: new URL(pathname.replace(reg, ''), CONFIG.website).toString(),
+    hrefLang: 'x-default'
+});
+const t = getLang(locale)
+const { title, description, image } = Astro.props;
+const headTitle = title || t.title;
+const headDesc = description || t.description;
+const ogImage = image || resolvedImageWithDomain;
+---
+
+<!doctype html>
+<html lang={languagesCode[lang] || lang} dir="ltr">
+    <head>
+        <meta charset='UTF-8' />
+        <meta name='viewport' content='width=device-width' />
+        <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+        <meta name='generator' content={Astro.generator} />
+        <link rel="sitemap" href="/sitemap-index.xml" />
+        <meta name="keywords" content={t.keywords}>
+        <SEO
+            title={headTitle}
+            description={headDesc}
+            canonical={canonicalURL}
+            languageAlternates={alternates}
+            twitter={{
+                creator: '@LiWen563',
+                site: '@LiWen563',
+                card: 'summary_large_image',
+                imageAlt: headTitle,
+                description: headDesc,
+            }}
+            openGraph={{
+                basic: {
+                    url: canonicalURL,
+                    type: 'website',
+                    title: headTitle,
+                    image: ogImage,
+                },
+                image: {
+                    url: ogImage,
+                    alt: headTitle,
+                },
+            }}
+        />
+        <!-- <ViewTransitions /> -->
+        <!-- Google Tag Manager -->
+        <script>
+        (function(l,i){
+            var w = window;
+            var d = document;
+            w.dataLayer = w.dataLayer||[];
+            w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+            var f=d.getElementsByTagName('script')[0];
+            var j=d.createElement('script');
+            var dl=l!='dataLayer'?'&l='+l:'';
+            j.async=true;
+            j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+            f.parentNode?.insertBefore(j,f);
+        })('dataLayer','GTM-N69NVBDF');
+        </script>
+        <!-- End Google Tag Manager -->
+        </script>
+    </head>
+    <body>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N69NVBDF" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+        <slot />
+    </body>
+</html>

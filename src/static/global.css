@@ -1,0 +1,142 @@
+:root {
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+    --accent-gradient: linear-gradient(
+        45deg,
+        rgb(var(--accent)),
+        rgb(var(--accent-light)) 30%,
+        white 60%
+    );
+    --c-bg: #fbfbfb;
+    --c-wg: #fff;
+    --c-wb: #c2c2c2;
+    --c-bg-op: #fbfbfb00;
+    --c-fg: #444444;
+    --c-scroll: #d9d9d9;
+    --c-scroll-hover: #bbbbbb;
+    --ant-color-primary: #1677ff;
+    scrollbar-color: var(--c-scrollbar) var(--c-bg);
+    --primary-glow: conic-gradient(from 180deg at 50% 50%,#16abff33 0deg,#0885ff33 55deg,#54d6ff33 120deg,#0071ff33 160deg,transparent 360deg);
+}
+
+html {
+    font-family: system-ui, sans-serif;
+    background-color: var(--c-bg);
+    color: var(--c-fg);
+}
+
+html.dark {
+    --c-bg: #212129;
+    --c-wg: #222;
+    --c-wb: #555;
+    --c-bg-op: #21212900;
+    --c-fg: #ddddf0;
+    --c-scroll: #333333;
+    --c-scroll-hover: #555555;
+}
+
+.polka {
+    background-image: radial-gradient(var(--c-wb) 0.7px, var(--c-wg) 1px);
+    background-size: 14px 14px;
+}
+.tr {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEXj4+P39/dWpvaqAAAAEElEQVQI12Ng+M+AFeEQBgB+vw/xWs16mgAAAABJRU5ErkJggg==) repeat;
+}
+
+.ant-radio-wrapper-checked .h-8 {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(0, 0, 255, 0.415);
+}
+
+.macbook {
+    position: relative;
+    padding: 1.7% 10.35% 7.2%;
+}
+
+.iphone {
+    --aspect-ratio: 1339/2716;
+    --shadow-inset: 5.6% 6.0%;
+    --shadow-radius: 8.1em;
+    --drop-padding: 7.9% 8.4% 8% 8.4%;
+    --drop-radius: 5em;
+    --mockup-shadow: 0,0,0, 0.70;
+    --x: 2em;
+    --y: 2em;
+    --b: 2em;
+    --s: 1;
+    position: relative;
+    padding: var(--drop-padding);
+}
+
+.iphone .frame {
+    border-radius: var(--drop-radius);
+}
+.iphone .sd {
+    top: 7.9%;
+    left: 8.4%;
+    right: 8.4%;
+    bottom: 2%;
+    border-radius: var(--drop-radius);
+}
+.iphone .sd .layer {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: rgba(var(--mockup-shadow));
+    pointer-events: none;
+    --ratio: 0;
+    transform: translate(calc(var(--x) * var(--ratio)),calc(var(--y) * var(--ratio))) scale(calc(var(--s)));
+    filter: blur(calc(var(--b) * var(--ratio)));
+}
+
+.ant-btn-primary{
+    background: var(--ant-color-primary);
+}
+.ant-btn-primary.bg-black{
+    background: #222;
+}
+.ant-btn-primary.bg-black:not(:disabled):not(.ant-btn-disabled):hover{
+    background: #444;
+}
+.ant-btn-primary.bg-black:disabled{
+    background: rgba(0, 0, 0, 0.04);
+}
+html .ant-drawer-right>.ant-drawer-content-wrapper {
+    box-shadow: none;
+}
+
+.iphone .sd .layer.layer-1 {
+    --ratio: 1;
+}
+.iphone .sd .layer.layer-2 {
+    --ratio: 1.5;
+}
+.iphone .sd .layer.layer-3 {
+    --ratio: 2.5;
+}
+.iphone .sd .layer.layer-4 {
+    --ratio: 4;
+}
+
+.iphone .sd .layer.layer-5 {
+    --ratio: 6;
+}
+
+.pencil .konvajs-content {
+    cursor: url(./pencil.png) 1 1,crosshair;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--c-scroll);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--c-scroll-hover);
+}
+::-webkit-scrollbar-track {
+    background-color: var(--c-bg);
+}

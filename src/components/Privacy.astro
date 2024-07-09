@@ -1,0 +1,12 @@
+---
+import { getLang } from '@i18n/index';
+// const isProd = import.meta.env.PROD;
+const { locale } = Astro.params;
+const l = getLang(locale);
+const t = l.editor;
+---
+
+<section class='pt-8 pb-4'>
+    <h2 class='text-xl font-extrabold mb-2 text-center'>{t.privacy}</h2>
+    <p class='text-slate-600 text-center'>{t.privacyCont}</p>
+</section>
